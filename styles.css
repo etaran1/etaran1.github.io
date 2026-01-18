@@ -122,3 +122,7 @@ iframe.pdf{
   .grid.two{ grid-template-columns: 1fr; }
   h1{ font-size: 28px; }
 }
+
+.card.full {
+  grid-column: 1 / -1;
+}
