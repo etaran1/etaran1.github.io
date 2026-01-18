@@ -197,9 +197,6 @@ iframe.pdf{
   }
 }
 
-.cert-summary {
-  margin-bottom: 2rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  opacity: 0.85;
+cert-summary {
+  margin-bottom: 2.5rem;
 }
