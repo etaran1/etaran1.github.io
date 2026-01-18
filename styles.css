@@ -164,26 +164,35 @@ iframe.pdf{
   border-radius: 14px;
 }
 
+.cert-summary {
+  grid-column: 1 / -1; /* sits BELOW both cards */
+  margin-top: 1.5rem;
+  opacity: 0.85;
+}
+
+/* Make the certifications card span full row in your grid */
+.card.full {
+  grid-column: 1 / -1;
+}
+
+/* Two-column list inside the same bubble */
 .cert-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem 2.5rem;
   list-style-position: inside;
   padding-left: 0;
+  margin: 0;
 }
 
+/* IMPORTANT: remove nowrap so long items can wrap nicely */
 .cert-list li {
-  white-space: nowrap;
+  white-space: normal;
 }
 
+/* Mobile: collapse to one column */
 @media (max-width: 640px) {
   .cert-list {
     grid-template-columns: 1fr;
   }
-}
-
-.cert-summary {
-  grid-column: 1 / -1; /* sits BELOW both cards */
-  margin-top: 1.5rem;
-  opacity: 0.85;
 }
