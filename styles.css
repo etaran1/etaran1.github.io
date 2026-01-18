@@ -164,12 +164,6 @@ iframe.pdf{
   border-radius: 14px;
 }
 
-.cert-summary {
-  grid-column: 1 / -1; /* sits BELOW both cards */
-  margin-top: 1.5rem;
-  opacity: 0.85;
-}
-
 /* Make the certifications card span full row in your grid */
 .card.full {
   grid-column: 1 / -1;
@@ -197,6 +191,6 @@ iframe.pdf{
   }
 }
 
-cert-summary {
+.cert-summary {
   margin-bottom: 2.5rem;
 }
