@@ -181,3 +181,9 @@ iframe.pdf{
     grid-template-columns: 1fr;
   }
 }
+
+.cert-summary {
+  grid-column: 1 / -1; /* sits BELOW both cards */
+  margin-top: 1.5rem;
+  opacity: 0.85;
+}
