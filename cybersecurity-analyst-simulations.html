@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Cybersecurity Analyst simulations showcasing investigation, correlation, and reporting." />
+  <title>Cybersecurity Analyst Simulations | Emilio Tarango</title>
+
+  <style>
+    :root{
+      --bg:#0b1220; --border:rgba(255,255,255,0.10);
+      --text:rgba(255,255,255,0.92); --muted:rgba(255,255,255,0.72); --muted2:rgba(255,255,255,0.58);
+      --accent:#6ea8fe; --shadow:0 18px 60px rgba(0,0,0,0.35);
+      --radius:18px; --max:1100px;
+      --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      --sans:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:var(--sans); color:var(--text); line-height:1.55;
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(110,168,254,0.18), transparent 55%),
+        radial-gradient(700px 450px at 85% 0%, rgba(126,231,135,0.14), transparent 55%),
+        radial-gradient(700px 500px at 80% 90%, rgba(255,204,102,0.10), transparent 55%),
+        var(--bg);
+    }
+    a{color:inherit;text-decoration:none}
+    a:hover{color:var(--accent)}
+    .topbar{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter:blur(14px);
+      background:rgba(11,18,32,0.62);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar-inner{
+      max-width:var(--max); margin:0 auto; padding:14px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .brand{display:flex; gap:10px; align-items:baseline; font-weight:700}
+    .brand .name{font-size:18px}
+    .brand .tag{
+      font-size:12px; color:var(--muted2);
+      border:1px solid var(--border); padding:4px 10px; border-radius:999px;
+      background:rgba(255,255,255,0.03);
+    }
+    .nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .nav a{
+      font-size:14px; color:var(--muted);
+      padding:8px 10px; border-radius:10px; border:1px solid transparent;
+    }
+    .nav a:hover{color:var(--text); border-color:var(--border); background:rgba(255,255,255,0.03)}
+    .nav a.active{color:var(--text); border-color:rgba(110,168,254,0.35); background:rgba(110,168,254,0.10)}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 60px}
+    .hero{
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border-radius:var(--radius); padding:26px; box-shadow:var(--shadow);
+    }
+    .hero h1{margin:0 0 10px; font-size:clamp(26px,3.2vw,38px); letter-spacing:-0.5px}
+    .hero p{margin:0; color:var(--muted); max-width:92ch}
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:14px; margin-top:18px}
+    .card{
+      grid-column:span 6;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.04);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.22);
+      position:relative; overflow:hidden;
+    }
+    .card::before{
+      content:""; position:absolute; inset:0;
+      background:radial-gradient(420px 160px at 20% 0%, rgba(110,168,254,0.12), transparent 50%);
+      pointer-events:none;
+    }
+    .top{display:flex; justify-content:space-between; gap:12px; position:relative}
+    .badge{
+      font-size:12px; color:var(--muted);
+      border:1px solid var(--border); background:rgba(255,255,255,0.03);
+      padding:6px 10px; border-radius:999px; white-space:nowrap;
+    }
+    .title{margin:0; font-size:16px}
+    .role{margin-top:6px; font-size:13px; color:var(--muted2)}
+    .block{margin-top:14px; position:relative}
+    .label{font-size:12px; letter-spacing:0.8px; text-transform:uppercase; color:rgba(255,255,255,0.62); margin-bottom:6px}
+    .block p{margin:0; color:var(--muted)}
+    ul{margin:8px 0 0 18px; padding:0; color:var(--muted)}
+    li{margin:6px 0}
+    .artifacts{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
+    .pill{
+      font-size:12px; border:1px solid var(--border); background:rgba(255,255,255,0.03);
+      padding:6px 10px; border-radius:999px; color:var(--muted);
+      display:inline-flex; align-items:center;
+    }
+    .quote{
+      margin-top:12px; border-left:3px solid rgba(110,168,254,0.45);
+      padding:10px 12px; background:rgba(110,168,254,0.06);
+      border-radius:12px; color:rgba(255,255,255,0.78);
+      font-family:var(--mono); font-size:12.5px; line-height:1.5;
+      position:relative;
+    }
+    .footer{
+      margin-top:26px; color:var(--muted2); font-size:13px;
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center;
+      padding-top:14px; border-top:1px solid var(--border);
+    }
+    @media (max-width:900px){ .card{grid-column:span 12} .brand .tag{display:none} .wrap{padding:22px 14px 44px} .hero{padding:18px} }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="name">Emilio Tarango</div>
+        <div class="tag">Cybersecurity Analyst Simulations</div>
+      </div>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="skills.html">Skills</a>
+        <a href="resume.html">Resume</a>
+        <a href="soc-simulations.html">SOC</a>
+        <a class="active" href="cybersecurity-analyst-simulations.html">Cybersecurity Analyst</a>
+        <a href="grc-risk-simulations.html">GRC / Risk</a>
+        <a href="security-engineer-simulations.html">Security Engineer</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Cybersecurity Analyst Simulations</h1>
+      <p>Two role-based scenarios demonstrating investigation, endpoint/network correlation, indicator handling, and analyst-grade reporting.</p>
+    </section>
+
+    <div class="grid">
+      <article class="card" id="cyber-beaconing">
+        <div class="top">
+          <div>
+            <h3 class="title">Endpoint + Network Correlation: Suspicious Beaconing</h3>
+            <div class="role">Role Simulation: Cybersecurity Analyst</div>
+          </div>
+          <div class="badge">Detection / Correlation</div>
+        </div>
+
+        <div class="block">
+          <div class="label">Scenario</div>
+          <p>Periodic outbound connections to an uncommon domain were observed from a single endpoint. Indicators suggested potential command-and-control beaconing.</p>
+        </div>
+
+        <div class="block">
+          <div class="label">Analysis & Decisions</div>
+          <ul>
+            <li>Correlated endpoint process activity with network egress timing and destinations.</li>
+            <li>Used domain rarity and periodicity as confidence multipliers.</li>
+            <li>Identified likely parent process and ruled out common benign updaters via baseline comparison.</li>
+            <li>Recommended containment due to high confidence of malicious communication pattern.</li>
+          </ul>
+        </div>
+
+        <div class="quote">
+          Analyst note: The regular interval + rare destination increased confidence; containment recommended even before full payload attribution.
+        </div>
+
+        <div class="block">
+          <div class="label">Outcome</div>
+          <ul>
+            <li>Produced investigation summary with evidence and recommended actions.</li>
+            <li>Recommended blocking destination and hunting for similar patterns across hosts.</li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="label">Artifacts Produced</div>
+          <div class="artifacts">
+            <span class="pill">Investigation Summary</span>
+            <span class="pill">IOC List + Enrichment Notes</span>
+            <span class="pill">Hunt Hypotheses</span>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="label">Reflection</div>
+          <ul>
+            <li>DNS telemetry would strengthen attribution and scoping.</li>
+            <li>Automated baseline comparisons would reduce analysis time.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card" id="cyber-phishing">
+        <div class="top">
+          <div>
+            <h3 class="title">Phishing Triage to Investigation: Credential Risk</h3>
+            <div class="role">Role Simulation: Cybersecurity Analyst</div>
+          </div>
+          <div class="badge">Email / Identity</div>
+        </div>
+
+        <div class="block">
+          <div class="label">Scenario</div>
+          <p>A user reported a suspicious email and admitted clicking a link. The primary concern was credential theft and account takeover.</p>
+        </div>
+
+        <div class="block">
+          <div class="label">Analysis & Decisions</div>
+          <ul>
+            <li>Assessed sender domain indicators and link reputation to establish risk level.</li>
+            <li>Evaluated user action + timing as drivers for response urgency.</li>
+            <li>Recommended password reset and session invalidation due to credible credential exposure risk.</li>
+            <li>Outlined follow-up checks for abnormal sign-in activity and rule changes.</li>
+          </ul>
+        </div>
+
+        <div class="quote">
+          Decision note: User interaction raised impact likelihood—account protection actions recommended even with limited telemetry.
+        </div>
+
+        <div class="block">
+          <div class="label">Outcome</div>
+          <ul>
+            <li>Produced concise incident summary and identity response checklist.</li>
+            <li>Recommended filtering improvements and user awareness follow-up.</li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="label">Artifacts Produced</div>
+          <div class="artifacts">
+            <span class="pill">Incident Summary + Actions</span>
+            <span class="pill">Email Indicator Notes</span>
+            <span class="pill">Identity Monitoring Checklist</span>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="label">Reflection</div>
+          <ul>
+            <li>Mail gateway telemetry would improve confidence and scoping.</li>
+            <li>Conditional access policies reduce takeover probability.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <footer class="footer">
+      <div>© <span id="year"></span> Emilio Tarango • Fort Worth, TX • Bilingual (English/Spanish)</div>
+      <div>Built for GitHub Pages • Cybersecurity Analyst simulations</div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
