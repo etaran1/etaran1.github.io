@@ -199,3 +199,18 @@ iframe.pdf{
   font-size: 12px;
   line-height: 1.75;
 }
+
+.project-link {
+  margin-top: 12px;
+}
+
+.project-link a {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6ea8fe;
+  text-decoration: none;
+}
+
+.project-link a:hover {
+  text-decoration: underline;
+}
