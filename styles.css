@@ -136,3 +136,20 @@ iframe.pdf{
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
 }
+
+.certifications {
+  background: linear-gradient(135deg, #0b1220, #121b35);
+  border-radius: 16px;
+  padding: 2.5rem 3rem;
+}
+
+.certifications {
+  max-width: none;
+  width: 100%;
+}
+
+.container > .certifications {
+  margin-left: -2rem;
+  margin-right: -2rem;
+  width: calc(100% + 4rem);
+}
