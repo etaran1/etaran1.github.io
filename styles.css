@@ -198,3 +198,8 @@ iframe.pdf{
 .certifications ul {
   margin-top: 1.75rem;
 }
+
+.cert-summary {
+  font-size: 1.2rem;
+  line-height: 1.75;
+}
