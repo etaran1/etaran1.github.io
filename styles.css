@@ -176,7 +176,7 @@ p{ margin:0 0 1rem; }
 }
 
 /* ===============================
-   GRID SYSTEM (THE FIX)
+   GRID SYSTEM
 ================================ */
 .grid{
   display:grid;
@@ -194,7 +194,7 @@ p{ margin:0 0 1rem; }
 }
 
 /* ===============================
-   Cards (SAFE EVERYWHERE)
+   Cards
 ================================ */
 .card{
   background:var(--surface2);
@@ -260,11 +260,12 @@ p{ margin:0 0 1rem; }
 
 .pdf{
   width:100%;
-  height:min(78vh,1000px);
-  min-height:760px;
+  height:100vh;        /* FIX: full viewport height */
+  min-height:900px;    /* ensures page 2 is reachable */
   border:1px solid rgba(255,255,255,.1);
   border-radius:14px;
   background:#fff;
+  display:block;
 }
 
 /* ===============================
@@ -308,8 +309,8 @@ p{ margin:0 0 1rem; }
 
 @media (max-width:640px){
   .pdf{
-    height:75vh;
-    min-height:560px;
+    height:85vh;
+    min-height:600px;
   }
 
   .bg{
