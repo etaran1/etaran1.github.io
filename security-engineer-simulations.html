@@ -104,7 +104,12 @@
       display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center;
       padding-top:14px; border-top:1px solid var(--border);
     }
-    @media (max-width:900px){ .card{grid-column:span 12} .brand .tag{display:none} .wrap{padding:22px 14px 44px} .hero{padding:18px} }
+    @media (max-width:900px){
+      .card{grid-column:span 12}
+      .brand .tag{display:none}
+      .wrap{padding:22px 14px 44px}
+      .hero{padding:18px}
+    }
   </style>
 </head>
 
@@ -112,11 +117,13 @@
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand">
-        <a href="index.html" aria-label="Home">Emilio Tarango</a>
+        <a class="name" href="index.html" aria-label="Home">Emilio Tarango</a>
+        <span class="tag">Security Engineer</span>
       </div>
 
       <nav class="nav" aria-label="Primary navigation">
         <a href="projects.html">Projects</a>
+        <a class="active" href="simulations.html" aria-current="page">Simulations</a>
       </nav>
     </div>
   </header>
@@ -223,7 +230,7 @@
           <div class="artifacts">
             <span class="pill">Architecture Review Summary</span>
             <span class="pill">Control Recommendation List</span>
-            <span class="pill">Logging & IR Readiness Notes</span>
+            <span class="pill">Logging &amp; IR Readiness Notes</span>
           </div>
         </div>
 
@@ -244,7 +251,8 @@
   </main>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
