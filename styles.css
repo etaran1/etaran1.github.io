@@ -202,9 +202,14 @@ h1{
 ================================ */
 .grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(3, minmax(0, 1fr)); /* prevents overflow */
   gap:14px;
   padding:clamp(18px,2.5vw,28px);
+}
+
+/* IMPORTANT: this makes your Projects page (class="grid two") a 2-column grid */
+.grid.two{
+  grid-template-columns:repeat(2, minmax(0, 1fr));
 }
 
 .card{
@@ -212,6 +217,11 @@ h1{
   border:1px solid rgba(255,255,255,.07);
   border-radius:16px;
   padding:16px;
+
+  /* optional but recommended: consistent spacing/alignment inside cards */
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
 .card h3{
@@ -223,6 +233,11 @@ h1{
 .card p{
   margin:0;
   color:var(--muted);
+}
+
+/* Optional: if you have .project-link in your HTML, this makes it sit at the bottom */
+.project-link{
+  margin-top:auto;
 }
 
 /* ===============================
@@ -250,12 +265,20 @@ h1{
    Responsive
 ================================ */
 @media (max-width:900px){
+  /* better than collapsing straight to 1 column */
   .grid{
-    grid-template-columns:1fr;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
   }
 
   .nav{
     flex-direction:column;
     align-items:flex-start;
+  }
+}
+
+@media (max-width:640px){
+  .grid,
+  .grid.two{
+    grid-template-columns:1fr;
   }
 }
