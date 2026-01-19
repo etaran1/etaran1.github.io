@@ -32,6 +32,7 @@
     a{color:inherit;text-decoration:none}
     a:hover{color:var(--accent)}
 
+    /* ===== Header (matches your projects-style header) ===== */
     .topbar{
       position:sticky; top:0; z-index:10;
       backdrop-filter:blur(14px);
@@ -45,7 +46,7 @@
       display:flex; align-items:center; justify-content:space-between; gap:12px;
     }
 
-    .brand{display:flex; gap:10px; align-items:baseline; font-weight:700}
+    .brand{display:flex; gap:10px; align-items:center; font-weight:700}
     .brand a{
       font-size:16px;
       color:rgba(255,255,255,0.88);
@@ -59,6 +60,13 @@
       background:rgba(255,255,255,0.03);
     }
 
+    .tag{
+      font-size:12px; color:var(--muted2);
+      border:1px solid var(--border); padding:4px 10px; border-radius:999px;
+      background:rgba(255,255,255,0.03);
+      white-space:nowrap;
+    }
+
     .nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
     .nav a{
       font-size:14px; color:var(--muted);
@@ -67,6 +75,7 @@
     .nav a:hover{color:var(--text); border-color:var(--border); background:rgba(255,255,255,0.03)}
     .nav a.active{color:var(--text); border-color:rgba(110,168,254,0.35); background:rgba(110,168,254,0.10)}
 
+    /* ===== Page layout ===== */
     .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 60px}
 
     .hero{
@@ -94,12 +103,11 @@
       pointer-events:none;
     }
 
-    /* Top row */
+    /* Top row + bubble fix */
     .top{
       display:flex; justify-content:space-between; gap:12px; position:relative;
       align-items:flex-start;
     }
-
     .badge{
       font-size:12px; color:var(--muted);
       border:1px solid var(--border); background:rgba(255,255,255,0.03);
@@ -108,8 +116,8 @@
       line-height:1.2;
     }
 
-    .title{margin:0; font-size:16px}
-    .role{margin-top:6px; font-size:13px; color:var(--muted2)}
+    .title{margin:0; font-size:16px; position:relative}
+    .role{margin-top:6px; font-size:13px; color:var(--muted2); position:relative}
 
     /* Blocks */
     .block{margin-top:14px; position:relative}
@@ -129,4 +137,178 @@
     }
 
     .quote{
-      margin-top:12px; border-left:3px solid rgba(110,168,254,0.45);
+      margin-top:12px;
+      border-left:3px solid rgba(110,168,254,0.45);
+      padding:10px 12px;
+      background:rgba(110,168,254,0.06);
+      border-radius:12px;
+      color:rgba(255,255,255,0.78);
+      font-family:var(--mono);
+      font-size:12.5px;
+      line-height:1.5;
+      position:relative;
+    }
+
+    /* Footer */
+    footer{
+      margin-top:26px; color:var(--muted2); font-size:13px;
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center;
+      padding-top:14px; border-top:1px solid var(--border);
+    }
+
+    @media (max-width:900px){
+      .card{grid-column:span 12}
+      .tag{display:none}
+      .wrap{padding:22px 14px 44px}
+      .hero{padding:18px}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <a href="index.html" aria-label="Home">Emilio Tarango</a>
+        <span class="tag">Security Engineer</span>
+      </div>
+
+      <!-- Keep nav simple like your projects header -->
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="projects.html">Projects</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>SOC Analyst Simulations</h1>
+      <p>Two incident-response scenarios demonstrating alert triage, escalation logic, and clear documentation artifacts.</p>
+    </section>
+
+    <div class="grid">
+      <!-- Simulation 1 -->
+      <article class="card" id="soc-phishing">
+        <div class="top">
+          <div>
+            <h3 class="title">Phishing Email → Credential Attempt (Triage + Escalation)</h3>
+            <div class="role">Role Simulation: SOC Analyst (Tier 1–2)</div>
+          </div>
+          <div class="badge">SOC / Triage</div>
+        </div>
+
+        <div class="block">
+          <div class="label">Scenario</div>
+          <p>User reports a suspicious email; shortly after, identity provider logs show unusual sign-in attempts from a new location/device.</p>
+        </div>
+
+        <div class="block">
+          <div class="label">Analysis &amp; Decisions</div>
+          <ul>
+            <li>Validated user report and extracted indicators (sender domain, URLs, attachment hashes).</li>
+            <li>Checked IdP authentication logs for impossible travel, new device, MFA failures, and token activity.</li>
+            <li>Determined severity and escalated based on confirmed credential-use signals.</li>
+            <li>Recommended containment: password reset, session/token revocation, and conditional access tightening.</li>
+          </ul>
+        </div>
+
+        <div class="quote">
+          Escalation rationale: Confirmed authentication anomalies + user-reported phishing indicates active credential compromise risk.
+        </div>
+
+        <div class="block">
+          <div class="label">Outcome</div>
+          <ul>
+            <li>Phish blocked across tenant; malicious domain and URLs added to deny lists.</li>
+            <li>Account secured with forced reset and session revocation; monitoring placed on related accounts.</li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="label">Artifacts Produced</div>
+          <div class="artifacts">
+            <span class="pill">Triage Notes</span>
+            <span class="pill">IoC List (domains/URLs/hashes)</span>
+            <span class="pill">Escalation Summary</span>
+            <span class="pill">Containment Checklist</span>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="label">Reflection</div>
+          <ul>
+            <li>Token/session revocation is often faster than endpoint action for immediate containment.</li>
+            <li>Conditional access + risky sign-in policies reduce repeat incidents.</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Simulation 2 -->
+      <article class="card" id="soc-malware">
+        <div class="top">
+          <div>
+            <h3 class="title">Endpoint Malware Alert → Host Containment + Evidence Collection</h3>
+            <div class="role">Role Simulation: SOC Analyst (Tier 1–2)</div>
+          </div>
+          <div class="badge">SOC / IR</div>
+        </div>
+
+        <div class="block">
+          <div class="label">Scenario</div>
+          <p>EDR triggers on suspicious process behavior (possible credential dumping or persistence). Host shows unusual outbound connections.</p>
+        </div>
+
+        <div class="block">
+          <div class="label">Analysis &amp; Decisions</div>
+          <ul>
+            <li>Confirmed alert fidelity (process tree, command line, parent/child relationships).</li>
+            <li>Reviewed network telemetry for C2 patterns, DNS anomalies, and rare destinations.</li>
+            <li>Decided containment scope (isolate host vs. block indicators) based on impact and confidence.</li>
+            <li>Collected evidence for IR: timeline notes, key logs, hashes, and affected user context.</li>
+          </ul>
+        </div>
+
+        <div class="quote">
+          Containment choice: Isolate the host when behavior indicates credential access or persistence—limit blast radius first, then investigate deeper.
+        </div>
+
+        <div class="block">
+          <div class="label">Outcome</div>
+          <ul>
+            <li>Host isolated and indicators blocked; IR case opened with evidence bundle.</li>
+            <li>Follow-up monitoring placed on related endpoints and user accounts.</li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="label">Artifacts Produced</div>
+          <div class="artifacts">
+            <span class="pill">Incident Timeline</span>
+            <span class="pill">EDR Evidence Summary</span>
+            <span class="pill">Network IoCs</span>
+            <span class="pill">Escalation + Handoff Notes</span>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="label">Reflection</div>
+          <ul>
+            <li>Consistent handoff notes reduce time-to-containment for Tier 2/IR teams.</li>
+            <li>Process-tree context beats single-event alerts for confidence scoring.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <footer>
+      <div>© <span id="year"></span> Emilio Tarango • Fort Worth, TX</div>
+      <div>SOC Analyst simulations</div>
+    </footer>
+  </main>
+
+  <script>
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
