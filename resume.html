@@ -12,11 +12,11 @@
   <div class="bg">
     <div class="wrap">
 
-      <!-- Navigation (STANDARD) -->
+      <!-- Navigation -->
       <header class="nav">
-        <a class="brand" href="index.html">
-          <span class="brand__dot"></span>
-          <span>Emilio Tarango</span>
+        <a class="brand" href="index.html" aria-label="Go to homepage">
+          <span class="brand__dot" aria-hidden="true"></span>
+          <span class="brand__text">Emilio Tarango</span>
         </a>
 
         <nav class="navlinks" aria-label="Primary">
@@ -30,34 +30,38 @@
       </header>
 
       <!-- Main -->
-      <main>
-        <div class="card">
-          <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
-            <h1 style="margin:0;">Resume</h1>
+      <main class="content">
+        <section class="card resume-card">
+
+          <div class="resume-head">
+            <h1 class="page-title resume-title">Resume</h1>
             <a class="btn" href="assets/Updated-Resume.pdf" download>Download PDF</a>
           </div>
 
-          <p class="muted">
+          <p class="muted lead">
             I am currently employed with the Transportation Security Administration (TSA) and am seeking
             opportunities to apply and expand my cybersecurity skill set within security-focused roles.
           </p>
 
-          <section class="highlights" aria-label="Highlights">
-            <p class="muted" style="margin-top:10px;">
-              <strong>Highlights:</strong> Active Secret Clearance • (ISC)² SSCP • Extensive CompTIA certifications •
-              Experience in regulated security environments • Security Operations focus (incident reporting,
-              troubleshooting, documentation) • Windows/Linux experience with network defense fundamentals,
-              plus surveillance systems and access control background.
-            </p>
-          </section>
+          <p class="muted resume-highlights">
+            <strong>Highlights:</strong> Active Secret Clearance • (ISC)² SSCP • Extensive CompTIA certifications •
+            Experience in regulated security environments • Security Operations focus (incident reporting,
+            troubleshooting, documentation) • Windows/Linux experience with network defense fundamentals,
+            plus surveillance systems and access control background.
+          </p>
 
-          <div style="height:14px;"></div>
+          <!-- PDF Preview -->
+          <iframe
+            class="pdf"
+            src="assets/Updated-Resume.pdf#view=FitH"
+            title="Resume PDF"
+            loading="lazy">
+          </iframe>
 
-          <iframe class="pdf" src="assets/Updated-Resume.pdf" title="Resume PDF"></iframe>
-        </div>
+        </section>
       </main>
 
-      <!-- Footer (STANDARD) -->
+      <!-- Footer -->
       <footer class="footer">
         <span>Fort Worth, TX</span>
         <span class="sep">•</span>
