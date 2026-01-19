@@ -4,93 +4,116 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Skills | Emilio Tarango</title>
+  <meta name="description" content="Cybersecurity, SOC, and risk-focused skills developed through real-world operations and hands-on labs." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <div class="wrap">
+  <div class="bg">
+    <div class="wrap">
 
-    <!-- NAV -->
-    <div class="nav">
-      <div class="brand"><a href="index.html">Emilio Tarango</a></div>
-      <div class="navlinks">
-        <a href="projects.html">Projects</a>
-        <a href="resume.html">Resume</a>
-        <a href="https://www.linkedin.com/in/emilio-tarango/" target="_blank" rel="noreferrer">LinkedIn</a>
-      </div>
+      <!-- Navigation (STANDARD) -->
+      <header class="nav">
+        <a class="brand" href="index.html">
+          <span class="brand__dot"></span>
+          <span>Emilio Tarango</span>
+        </a>
+
+        <nav class="navlinks" aria-label="Primary">
+          <a href="projects.html">Projects</a>
+          <a href="resume.html">Resume</a>
+          <a href="https://www.linkedin.com/in/emilio-tarango/" target="_blank" rel="noreferrer noopener">
+            LinkedIn
+          </a>
+        </nav>
+      </header>
+
+      <!-- Main -->
+      <main>
+
+        <!-- SKILLS INTRO -->
+        <section>
+          <h1>Skills</h1>
+          <p class="muted">
+            My skill set is grounded in real-world security operations and compliance-driven
+            environments. Cybersecurity skills are developed and applied through hands-on labs
+            and documented projects that extend operational security principles into technical domains.
+          </p>
+        </section>
+
+        <!-- SKILLS GRID -->
+        <div class="grid two">
+          <div class="card">
+            <h3>Security Operations</h3>
+            <ul>
+              <li>Incident documentation, escalation, shift-based operations</li>
+              <li>Monitoring mindset: detect → triage → respond → report</li>
+              <li>Compliance in regulated environments</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Networking &amp; Defense</h3>
+            <ul>
+              <li>Network fundamentals, segmentation concepts, traffic analysis</li>
+              <li>Vulnerability awareness and remediation thinking</li>
+              <li>Windows &amp; Linux operations</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Tools &amp; Platforms</h3>
+            <ul>
+              <li>Windows, Linux</li>
+              <li>Documentation &amp; reporting (clear, repeatable notes)</li>
+              <li>Monitoring / security tooling (expanded through labs)</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Communication</h3>
+            <ul>
+              <li>Bilingual (English / Spanish)</li>
+              <li>Clear communication with technical &amp; non-technical users</li>
+              <li>Training and mentoring experience</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CERTIFICATIONS -->
+        <section id="certifications" style="margin-top:40px;">
+          <h2>Certifications</h2>
+          <p class="muted">
+            Certifications support my hands-on security operations experience and ongoing
+            development in cybersecurity analysis, risk management, and secure system design.
+          </p>
+
+          <div class="card full certifications">
+            <ul class="cert-list">
+              <li>(ISC)² Systems Security Certified Practitioner (SSCP)</li>
+              <li>CompTIA Security+</li>
+              <li>CompTIA CySA+</li>
+              <li>CompTIA PenTest+</li>
+              <li>CompTIA Network+</li>
+              <li>CompTIA A+</li>
+              <li>ITIL v4 Foundation</li>
+              <li>LPI Linux Essentials</li>
+            </ul>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- Footer (STANDARD) -->
+      <footer class="footer">
+        <span>Fort Worth, TX</span>
+        <span class="sep">•</span>
+        <a href="mailto:tarango_emilio@yahoo.com">tarango_emilio@yahoo.com</a>
+        <span class="sep">•</span>
+        <span>Bilingual (English / Spanish)</span>
+      </footer>
+
     </div>
-
-    <!-- SKILLS INTRO -->
-    <section>
-      <h1>Skills</h1>
-      <p class="muted">
-        My skill set is grounded in real-world security operations and compliance-driven environments.
-        Cybersecurity skills are developed and applied through hands-on labs and documented projects that
-        extend operational security principles into technical domains.
-      </p>
-    </section>
-
-    <!-- SKILLS GRID -->
-    <div class="grid two">
-      <div class="card">
-        <h3>Security Operations</h3>
-        <ul>
-          <li>Incident documentation, escalation, shift-based operations</li>
-          <li>Monitoring mindset: detect → triage → respond → report</li>
-          <li>Compliance in regulated environments</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Networking & Defense</h3>
-        <ul>
-          <li>Network fundamentals, segmentation concepts, traffic analysis</li>
-          <li>Vulnerability awareness and remediation thinking</li>
-          <li>Windows & Linux operations</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Tools & Platforms</h3>
-        <ul>
-          <li>Windows, Linux</li>
-          <li>Documentation + reporting (clear, repeatable notes)</li>
-          <li>Monitoring/security tooling (expand from labs)</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Communication</h3>
-        <ul>
-          <li>Bilingual (English/Spanish)</li>
-          <li>Clear communication with technical & non-technical users</li>
-          <li>Training / mentoring experience</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- CERTIFICATIONS (OUTSIDE GRID – FIXED) -->
-    <section id="certifications" style="margin-top:40px;">
-      <h2>Certifications</h2>
-      <p class="muted">
-        Certifications support my hands-on security operations experience and ongoing
-        development in cybersecurity analysis, risk management, and secure system design.
-      </p>
-
-      <div class="card full certifications">
-        <ul class="cert-list">
-          <li>(ISC)² Systems Security Certified Practitioner (SSCP)</li>
-          <li>CompTIA Security+</li>
-          <li>CompTIA CySA+</li>
-          <li>CompTIA PenTest+</li>
-          <li>CompTIA Network+</li>
-          <li>CompTIA A+</li>
-          <li>ITIL v4 Foundation</li>
-          <li>LPI Linux Essentials</li>
-        </ul>
-      </div>
-    </section>
-
   </div>
 </body>
 </html>
