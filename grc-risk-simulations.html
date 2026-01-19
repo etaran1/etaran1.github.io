@@ -47,13 +47,11 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
     }
 
-    .brand{display:flex; gap:10px; align-items:baseline; font-weight:700}
+    .brand{font-weight:700}
     .brand a{font-size:18px}
 
-    .nav{display:flex; gap:10px}
     .nav a{
       font-size:14px;
       color:var(--muted);
@@ -83,14 +81,9 @@
     .hero h1{
       margin:0 0 10px;
       font-size:clamp(26px,3.2vw,38px);
-      letter-spacing:-0.5px;
     }
 
-    .hero p{
-      margin:0;
-      color:var(--muted);
-      max-width:92ch;
-    }
+    .hero p{margin:0;color:var(--muted)}
 
     .grid{
       display:grid;
@@ -118,7 +111,7 @@
       pointer-events:none;
     }
 
-    /* ✅ FIXED BUBBLES */
+    /* ✅ bubble fix */
     .top{
       display:flex;
       justify-content:space-between;
@@ -134,10 +127,8 @@
       padding:6px 10px;
       border-radius:999px;
       white-space:nowrap;
-
       display:inline-flex;
       align-items:center;
-      align-self:flex-start;
       line-height:1.2;
     }
 
@@ -147,26 +138,14 @@
     .block{margin-top:14px}
     .label{
       font-size:12px;
-      letter-spacing:0.8px;
       text-transform:uppercase;
+      letter-spacing:0.8px;
       color:rgba(255,255,255,0.62);
       margin-bottom:6px;
     }
 
     ul{margin:8px 0 0 18px;color:var(--muted)}
     li{margin:6px 0}
-
-    .artifacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-    .pill{
-      font-size:12px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.03);
-      padding:6px 10px;
-      border-radius:999px;
-      color:var(--muted);
-      display:inline-flex;
-      align-items:center;
-    }
 
     .quote{
       margin-top:12px;
@@ -176,7 +155,15 @@
       border-radius:12px;
       font-family:var(--mono);
       font-size:12.5px;
-      line-height:1.5;
+    }
+
+    .artifacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .pill{
+      font-size:12px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.03);
+      padding:6px 10px;
+      border-radius:999px;
     }
 
     .footer{
@@ -193,8 +180,6 @@
 
     @media (max-width:900px){
       .card{grid-column:span 12}
-      .wrap{padding:22px 14px 44px}
-      .hero{padding:18px}
     }
   </style>
 </head>
@@ -214,10 +199,11 @@
   <main class="wrap">
     <section class="hero">
       <h1>GRC / Risk Analyst Simulations</h1>
-      <p>Two scenarios demonstrating risk identification, likelihood/impact reasoning, control mapping, and defensible governance documentation.</p>
+      <p>Risk identification, likelihood/impact reasoning, control mapping, and governance documentation.</p>
     </section>
 
     <div class="grid">
+      <!-- Simulation 1 -->
       <article class="card">
         <div class="top">
           <div>
@@ -226,8 +212,53 @@
           </div>
           <div class="badge">GRC / Risk</div>
         </div>
+
+        <div class="block">
+          <div class="label">Scenario</div>
+          <p>Sensitive operational data stored on shared network drives without encryption or regular access review.</p>
+        </div>
+
+        <div class="block">
+          <div class="label">Analysis &amp; Decisions</div>
+          <ul>
+            <li>Identified confidentiality and compliance exposure.</li>
+            <li>Assessed likelihood based on access scope and audit gaps.</li>
+            <li>Rated impact as high due to data sensitivity.</li>
+            <li>Selected mitigation over acceptance.</li>
+          </ul>
+        </div>
+
+        <div class="quote">
+          Risk decision: Not acceptable as-is due to broad access and high confidentiality impact.
+        </div>
+
+        <div class="block">
+          <div class="label">Outcome</div>
+          <ul>
+            <li>Risk logged and prioritized for remediation.</li>
+            <li>Encryption-at-rest and quarterly access reviews recommended.</li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="label">Artifacts Produced</div>
+          <div class="artifacts">
+            <span class="pill">Risk Register Entry</span>
+            <span class="pill">Likelihood × Impact Scoring</span>
+            <span class="pill">Mitigation Plan</span>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="label">Reflection</div>
+          <ul>
+            <li>Data classification simplifies scoring consistency.</li>
+            <li>Automated access reporting improves audit quality.</li>
+          </ul>
+        </div>
       </article>
 
+      <!-- Simulation 2 -->
       <article class="card">
         <div class="top">
           <div>
@@ -235,6 +266,50 @@
             <div class="role">Role Simulation: GRC / Risk Analyst</div>
           </div>
           <div class="badge">GRC / Vendor</div>
+        </div>
+
+        <div class="block">
+          <div class="label">Scenario</div>
+          <p>A third-party vendor requests persistent access to internal systems for support operations.</p>
+        </div>
+
+        <div class="block">
+          <div class="label">Analysis &amp; Decisions</div>
+          <ul>
+            <li>Reviewed access scope, authentication strength, and monitoring.</li>
+            <li>Identified over-privilege and lack of time-bound controls.</li>
+            <li>Conditionally accepted risk with compensating controls.</li>
+            <li>Required time-bound access and review cadence.</li>
+          </ul>
+        </div>
+
+        <div class="quote">
+          Residual risk acceptable only with segmentation, monitoring, and periodic review.
+        </div>
+
+        <div class="block">
+          <div class="label">Outcome</div>
+          <ul>
+            <li>Risk accepted with documented conditions.</li>
+            <li>Vendor access redesigned to least privilege.</li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="label">Artifacts Produced</div>
+          <div class="artifacts">
+            <span class="pill">Risk Acceptance Memo</span>
+            <span class="pill">Control Justification Notes</span>
+            <span class="pill">Residual Risk Assessment</span>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="label">Reflection</div>
+          <ul>
+            <li>Segmentation reduces vendor blast radius.</li>
+            <li>Logging improves incident response readiness.</li>
+          </ul>
         </div>
       </article>
     </div>
