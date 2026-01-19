@@ -19,17 +19,16 @@
   --radius:18px;
   --max:1100px;
 
-  /* Typography Scale */
-  --fs-900: clamp(3rem, 4.8vw, 4rem);       /* h1 */
-  --fs-800: clamp(1.9rem, 2.7vw, 2.25rem);  /* h2 */
-  --fs-700: 1.25rem;                        /* h3 */
-  --fs-600: 1.125rem;                       /* lead */
-  --fs-500: 1rem;                           /* body */
-  --fs-400: 0.95rem;                        /* small */
-  --fs-300: 0.9rem;                         /* nav/footer */
+  --fs-900: clamp(3rem, 4.8vw, 4rem);
+  --fs-800: clamp(1.9rem, 2.7vw, 2.25rem);
+  --fs-700: 1.25rem;
+  --fs-600: 1.125rem;
+  --fs-500: 1rem;
+  --fs-400: .95rem;
+  --fs-300: .9rem;
 
-  --lh-tight: 1.12;
-  --lh-body: 1.6;
+  --lh-tight:1.12;
+  --lh-body:1.6;
 }
 
 /* ===============================
@@ -40,18 +39,16 @@
 *::after{ box-sizing:border-box; }
 
 html{
-  height:100%;
   background:var(--bg0);
-  font-size:16px;
 }
 
 body{
-  min-height:100vh;
   margin:0;
-  color:var(--text);
+  min-height:100vh;
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
   font-size:var(--fs-500);
   line-height:var(--lh-body);
+  color:var(--text);
   background:
     linear-gradient(
       180deg,
@@ -60,7 +57,6 @@ body{
       var(--bg0) 100%
     );
   overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
 }
 
 a{
@@ -68,14 +64,8 @@ a{
   text-decoration:none;
 }
 
-a:focus-visible{
-  outline:2px solid rgba(122,162,255,.55);
-  outline-offset:3px;
-  border-radius:10px;
-}
-
 /* ===============================
-   Background Wrapper
+   Layout Wrappers
 ================================ */
 .bg{
   min-height:100vh;
@@ -85,6 +75,10 @@ a:focus-visible{
 .wrap{
   max-width:var(--max);
   margin:0 auto;
+}
+
+main{
+  margin-top:18px;
 }
 
 /* ===============================
@@ -103,7 +97,7 @@ a:focus-visible{
 }
 
 .brand{
-  display:inline-flex;
+  display:flex;
   align-items:center;
   gap:10px;
   font-weight:700;
@@ -142,7 +136,7 @@ a:focus-visible{
 h1,h2,h3{
   margin:0 0 .6rem;
   line-height:var(--lh-tight);
-  letter-spacing:-0.02em;
+  letter-spacing:-.02em;
 }
 
 h1{ font-size:var(--fs-900); }
@@ -153,7 +147,6 @@ p{ margin:0 0 1rem; }
 
 .muted{ color:var(--muted); }
 
-/* Support both class names (home uses .lede, skills uses .lead) */
 .lead,
 .lede{
   font-size:var(--fs-600);
@@ -162,87 +155,57 @@ p{ margin:0 0 1rem; }
 }
 
 /* ===============================
-   Layout helpers
+   Sections
 ================================ */
-main{
-  margin-top:18px;
-}
-
-/* Generic content container (Skills page uses main.content) */
-.content{
-  padding-top:4px;
-}
-
-/* Section rhythm (Skills uses .section / .section--spaced) */
-.section{
-  margin-top:18px;
-}
-
-.section--spaced{
-  margin-top:28px;
-}
-
-.page-title{
-  margin-bottom:.4rem;
-}
+.section{ margin-top:18px; }
+.section--spaced{ margin-top:28px; }
 
 /* ===============================
-   Hero (Homepage)
+   Hero
 ================================ */
-.hero{
-  margin-top:18px;
-}
-
-.hero__top{
-  padding:18px 6px 8px;
-}
+.hero{ margin-top:18px; }
+.hero__top{ padding:18px 6px 8px; }
 
 .meta{
   display:flex;
   flex-wrap:wrap;
   gap:10px;
   margin-top:10px;
-  color:var(--muted);
   font-size:var(--fs-400);
-}
-
-.meta .dot{
-  opacity:.7;
+  color:var(--muted);
 }
 
 /* ===============================
-   Grid System (Home / Projects / Skills)
+   GRID SYSTEM (THE FIX)
 ================================ */
 .grid{
   display:grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)); /* Home default */
+  grid-template-columns:repeat(3,minmax(0,1fr));
   gap:14px;
   margin-top:18px;
 }
 
 .grid.two{
-  grid-template-columns: repeat(2, minmax(0, 1fr)); /* Projects + Skills */
+  grid-template-columns:repeat(2,minmax(0,1fr));
 }
 
-/* Full-width card inside a grid (Skills certifications uses .card.full) */
 .grid .full{
-  grid-column: 1 / -1;
+  grid-column:1 / -1;
 }
 
 /* ===============================
-   Cards (FIXED for all pages)
+   Cards (SAFE EVERYWHERE)
 ================================ */
 .card{
   background:var(--surface2);
   border:1px solid rgba(255,255,255,.07);
   border-radius:16px;
   padding:18px;
-  display:block; /* IMPORTANT: do not make global cards flex */
+  display:block;
 }
 
 .card > :last-child{ margin-bottom:0; }
 
-/* Lists inside cards (Skills) */
 .card ul{
   margin:0;
   padding-left:1.1rem;
@@ -253,7 +216,7 @@ main{
 }
 
 /* ===============================
-   Projects Page Helpers
+   Projects
 ================================ */
 .project-link{
   margin-top:10px;
@@ -263,9 +226,8 @@ main{
   display:inline-flex;
   padding:8px 10px;
   border-radius:12px;
-  border:1px solid rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.1);
   background:rgba(255,255,255,.04);
-  color:var(--text);
   font-size:var(--fs-400);
 }
 
@@ -273,23 +235,9 @@ main{
   background:rgba(255,255,255,.08);
 }
 
-/* Make project card title links look nice */
-.card h3 a{
-  color:var(--text);
-  text-decoration:none;
-}
-
-.card h3 a:hover{
-  text-decoration:underline;
-}
-
 /* ===============================
-   Certifications (Skills)
+   Certifications
 ================================ */
-.certifications{
-  /* visual-only; grid handles width via .full */
-}
-
 .cert-list{
   columns:2;
   column-gap:22px;
@@ -299,54 +247,24 @@ main{
 
 .cert-list li{
   break-inside:avoid;
-  margin:.35rem 0;
 }
 
 /* ===============================
-   Resume Page
+   Resume
 ================================ */
-.resume-card{ /* layout only for resume card (do NOT use on other pages) */
+.resume-card{
   display:flex;
   flex-direction:column;
   gap:16px;
 }
 
-.resume-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
-}
-
-.resume-title{ margin:0; }
-
-.resume-highlights{ margin-top:0; }
-
-/* PDF Preview */
 .pdf{
   width:100%;
   height:min(78vh,1000px);
   min-height:760px;
-  border:1px solid rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.1);
   border-radius:14px;
   background:#fff;
-}
-
-/* Button */
-.btn{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:10px 14px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.05);
-  font-size:var(--fs-300);
-}
-
-.btn:hover{
-  background:rgba(255,255,255,.08);
 }
 
 /* ===============================
@@ -363,14 +281,6 @@ main{
   color:var(--muted2);
 }
 
-.footer a{
-  color:var(--muted2);
-}
-
-.footer a:hover{
-  color:var(--text);
-}
-
 .sep{ opacity:.6; }
 
 /* ===============================
@@ -384,7 +294,7 @@ main{
 
   .grid,
   .grid.two{
-    grid-template-columns: 1fr;
+    grid-template-columns:1fr;
   }
 
   .grid .full{
