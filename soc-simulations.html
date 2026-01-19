@@ -16,7 +16,7 @@
       --sans:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
     }
 
-    *{box-sizing:border-box}
+    *{ box-sizing:border-box; }
     html, body { height:100%; }
 
     body{
@@ -26,7 +26,7 @@
       line-height:1.55;
       min-height:100vh;
 
-      /* ✅ Seam-free background */
+      /* ✅ Seam-free background (prevents Safari horizontal split) */
       background:
         radial-gradient(1400px 900px at 15% 12%, rgba(110,168,254,0.22), transparent 70%),
         radial-gradient(1200px 800px at 85% -10%, rgba(126,231,135,0.18), transparent 72%),
@@ -59,25 +59,43 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
+      gap:12px;
     }
 
+    .brand{ font-weight:700; }
     .brand a{
-      font-weight:700;
       font-size:16px;
+      color:rgba(255,255,255,0.88);
       padding:8px 10px;
       border-radius:10px;
+      border:1px solid transparent;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .brand a:hover{
+      color:var(--text);
+      border-color:var(--border);
+      background:rgba(255,255,255,0.03);
     }
 
+    .nav{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
     .nav a{
       font-size:14px;
       color:var(--muted);
       padding:8px 10px;
       border-radius:10px;
+      border:1px solid transparent;
     }
     .nav a:hover{
       color:var(--text);
-      background:rgba(255,255,255,0.03);
-      border:1px solid var(--border);
+      border-color:var(--border);
+      background:rgba(255,255,255,0.03)
+    }
+    .nav a.active{
+      color:var(--text);
+      border-color:rgba(110,168,254,0.35);
+      background:rgba(110,168,254,0.10)
     }
 
     /* ===== Layout ===== */
@@ -94,14 +112,16 @@
       padding:26px;
       box-shadow:var(--shadow);
     }
-
     .hero h1{
       margin:0 0 10px;
       font-size:clamp(26px,3.2vw,38px);
       letter-spacing:-0.5px;
     }
-
-    .hero p{margin:0;color:var(--muted)}
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      max-width:92ch;
+    }
 
     .grid{
       display:grid;
@@ -134,6 +154,7 @@
       justify-content:space-between;
       gap:12px;
       align-items:flex-start;
+      position:relative;
     }
 
     .badge{
@@ -144,22 +165,45 @@
       padding:6px 10px;
       border-radius:999px;
       white-space:nowrap;
+      display:inline-flex;
+      align-items:center;
+      line-height:1.2;
+      align-self:flex-start;
+      position:relative;
     }
 
-    .title{margin:0;font-size:16px}
-    .role{margin-top:6px;font-size:13px;color:var(--muted2)}
+    .title{
+      margin:0;
+      font-size:16px;
+      position:relative;
+    }
 
-    .block{margin-top:14px}
+    .role{
+      margin-top:6px;
+      font-size:13px;
+      color:var(--muted2);
+      position:relative;
+    }
+
+    .block{
+      margin-top:14px;
+      position:relative;
+    }
     .label{
       font-size:12px;
-      letter-spacing:0.8px;
       text-transform:uppercase;
+      letter-spacing:0.8px;
       color:rgba(255,255,255,0.62);
       margin-bottom:6px;
     }
+    .block p{ margin:0; color:var(--muted); }
 
-    ul{margin:8px 0 0 18px;color:var(--muted)}
-    li{margin:6px 0}
+    ul{
+      margin:8px 0 0 18px;
+      padding:0;
+      color:var(--muted);
+    }
+    li{ margin:6px 0; }
 
     .quote{
       margin-top:12px;
@@ -167,8 +211,11 @@
       padding:10px 12px;
       background:rgba(110,168,254,0.06);
       border-radius:12px;
+      color:rgba(255,255,255,0.78);
       font-family:var(--mono);
       font-size:12.5px;
+      line-height:1.5;
+      position:relative;
     }
 
     .artifacts{
@@ -184,6 +231,9 @@
       background:rgba(255,255,255,0.03);
       padding:6px 10px;
       border-radius:999px;
+      color:var(--muted);
+      display:inline-flex;
+      align-items:center;
     }
 
     footer{
@@ -199,7 +249,9 @@
     }
 
     @media (max-width:900px){
-      .card{grid-column:span 12}
+      .card{ grid-column:span 12; }
+      .wrap{ padding:22px 14px 44px; }
+      .hero{ padding:18px; }
     }
   </style>
 </head>
@@ -208,10 +260,12 @@
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand">
-        <a href="index.html">Emilio Tarango</a>
+        <a href="index.html" aria-label="Home">Emilio Tarango</a>
       </div>
-      <nav class="nav">
+
+      <nav class="nav" aria-label="Primary navigation">
         <a href="projects.html">Projects</a>
+        <a class="active" href="soc.html" aria-current="page">SOC</a>
       </nav>
     </div>
   </header>
@@ -219,11 +273,127 @@
   <main class="wrap">
     <section class="hero">
       <h1>SOC Analyst Simulations</h1>
-      <p>Two incident-response scenarios demonstrating alert triage, escalation logic, and clear documentation artifacts.</p>
+      <p>Two incident-response scenarios demonstrating alert triage, escalation logic, containment decisions, and documentation artifacts.</p>
     </section>
 
     <div class="grid">
-      <!-- Simulation cards unchanged -->
+      <!-- Simulation 1 -->
+      <article class="card" id="soc-phishing">
+        <div class="top">
+          <div>
+            <h3 class="title">Phishing Email → Credential Attempt (Triage + Escalation)</h3>
+            <div class="role">Role Simulation: SOC Analyst (Tier 1–2)</div>
+          </div>
+          <div class="badge">SOC / Triage</div>
+        </div>
+
+        <div class="block">
+          <div class="label">Scenario</div>
+          <p>User reports a suspicious email; shortly after, identity provider logs show unusual sign-in attempts from a new location and device.</p>
+        </div>
+
+        <div class="block">
+          <div class="label">Analysis &amp; Decisions</div>
+          <ul>
+            <li>Validated the report and extracted indicators (sender domain, URLs, attachment hashes).</li>
+            <li>Reviewed IdP logs for risky sign-ins, new device enrollment, MFA failures, and token activity.</li>
+            <li>Correlated timing with email delivery to confirm likely credential capture attempt.</li>
+            <li>Escalated severity based on confirmed authentication anomalies.</li>
+            <li>Recommended containment: forced password reset, session/token revocation, and conditional access tightening.</li>
+          </ul>
+        </div>
+
+        <div class="quote">
+          Escalation rationale: Confirmed authentication anomalies + user-reported phishing indicates active credential compromise risk.
+        </div>
+
+        <div class="block">
+          <div class="label">Outcome</div>
+          <ul>
+            <li>Phish blocked across tenant; malicious sender domain and URLs added to deny lists.</li>
+            <li>Account secured with forced reset and session revocation; monitoring added for adjacent accounts.</li>
+            <li>Post-incident user guidance issued (reporting, MFA hygiene, suspicious link handling).</li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="label">Artifacts Produced</div>
+          <div class="artifacts">
+            <span class="pill">Triage Notes</span>
+            <span class="pill">IoC List (domains/URLs/hashes)</span>
+            <span class="pill">Escalation Summary</span>
+            <span class="pill">Containment Checklist</span>
+            <span class="pill">User Advisory</span>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="label">Reflection</div>
+          <ul>
+            <li>Token/session revocation is often faster than endpoint action for immediate containment.</li>
+            <li>Conditional access + risky sign-in policies reduce repeat incidents and speed triage.</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Simulation 2 -->
+      <article class="card" id="soc-malware">
+        <div class="top">
+          <div>
+            <h3 class="title">Endpoint Malware Alert → Host Containment + Evidence Collection</h3>
+            <div class="role">Role Simulation: SOC Analyst (Tier 1–2)</div>
+          </div>
+          <div class="badge">SOC / IR</div>
+        </div>
+
+        <div class="block">
+          <div class="label">Scenario</div>
+          <p>EDR triggers on suspicious process behavior (possible credential dumping or persistence). Host also shows unusual outbound connections.</p>
+        </div>
+
+        <div class="block">
+          <div class="label">Analysis &amp; Decisions</div>
+          <ul>
+            <li>Confirmed alert fidelity: process tree, command line, parent/child relationships, and signed binary reputation.</li>
+            <li>Reviewed telemetry for C2 indicators: rare DNS, beacon-like intervals, and uncommon destinations.</li>
+            <li>Determined containment scope based on confidence and business impact (isolate host vs. block indicators).</li>
+            <li>Collected evidence for IR: timeline notes, key logs, hashes, and affected user and device context.</li>
+            <li>Escalated with a concise handoff package for Tier 2/IR investigation.</li>
+          </ul>
+        </div>
+
+        <div class="quote">
+          Containment choice: Isolate the host when behavior indicates credential access or persistence—limit blast radius first, then investigate deeper.
+        </div>
+
+        <div class="block">
+          <div class="label">Outcome</div>
+          <ul>
+            <li>Host isolated and indicators blocked; incident case opened with evidence bundle.</li>
+            <li>Follow-up monitoring placed on related endpoints, accounts, and network segments.</li>
+            <li>Recommended hardening actions: least privilege review, credential reset if needed, and control tuning.</li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="label">Artifacts Produced</div>
+          <div class="artifacts">
+            <span class="pill">Incident Timeline</span>
+            <span class="pill">EDR Evidence Summary</span>
+            <span class="pill">Network IoCs</span>
+            <span class="pill">Escalation + Handoff Notes</span>
+            <span class="pill">Containment Decision Log</span>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="label">Reflection</div>
+          <ul>
+            <li>Consistent handoff notes reduce time-to-containment for Tier 2/IR teams.</li>
+            <li>Process-tree context beats single-event alerts for confidence scoring and false-positive reduction.</li>
+          </ul>
+        </div>
+      </article>
     </div>
 
     <footer>
@@ -233,7 +403,8 @@
   </main>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
