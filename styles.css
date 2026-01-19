@@ -21,59 +21,54 @@
 }
 
 /* ===============================
-   Base
+   Base + Background Safety
 ================================ */
 *{ box-sizing:border-box; }
 
-html, body{ height:100%; }
+html{
+  height:100%;
+  background:var(--bg0); /* prevents Safari white flash */
+}
 
 body{
+  min-height:100vh;
   margin:0;
   color:var(--text);
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
   line-height:1.55;
-  background:linear-gradient(
-    180deg,
-    var(--bg0) 0%,
-    var(--bg1) 50%,
-    var(--bg0) 100%
-  );
+  background:
+    linear-gradient(
+      180deg,
+      var(--bg0) 0%,
+      var(--bg1) 50%,
+      var(--bg0) 100%
+    );
   position:relative;
   overflow-x:hidden;
+  isolation:isolate; /* fixes pseudo-element stacking */
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
 
-/* Symmetrical top & bottom vignette */
+/* ===============================
+   Vignette Overlay
+================================ */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
   background:
-    radial-gradient(
-      900px 500px at 50% -10%,
-      rgba(122,162,255,0.10),
-      transparent 60%
-    ),
-    radial-gradient(
-      900px 500px at 50% 110%,
-      rgba(122,162,255,0.10),
-      transparent 60%
-    ),
-    radial-gradient(
-      1200px 700px at 50% -20%,
-      rgba(0,0,0,0.65),
-      transparent 55%
-    ),
-    radial-gradient(
-      1200px 700px at 50% 120%,
-      rgba(0,0,0,0.65),
-      transparent 55%
-    );
-  z-index:-1;
+    radial-gradient(900px 500px at 50% -10%, rgba(122,162,255,0.10), transparent 60%),
+    radial-gradient(900px 500px at 50% 110%, rgba(122,162,255,0.10), transparent 60%),
+    radial-gradient(1200px 700px at 50% -20%, rgba(0,0,0,0.65), transparent 55%),
+    radial-gradient(1200px 700px at 50% 120%, rgba(0,0,0,0.65), transparent 55%);
+  z-index:0;
 }
 
+/* ===============================
+   Links
+================================ */
 a{
   color:inherit;
   text-decoration:none;
@@ -83,13 +78,17 @@ a{
    Layout
 ================================ */
 .bg{
-  min-height:100%;
+  min-height:100vh;
   padding:clamp(16px,3vw,36px);
+  position:relative;
+  z-index:1;
 }
 
 .wrap{
   max-width:var(--max);
   margin:0 auto;
+  position:relative;
+  z-index:1;
 }
 
 /* ===============================
@@ -141,7 +140,7 @@ a{
 }
 
 /* ===============================
-   Hero
+   Hero / Page Headings
 ================================ */
 .hero{
   margin-top:18px;
@@ -163,17 +162,14 @@ h1{
   letter-spacing:-0.4px;
 }
 
-/* FULL-WIDTH SUMMARY TEXT */
 .lede{
   margin:0 0 8px;
   color:rgba(255,255,255,.86);
-  max-width:100%;
 }
 
 .muted{
   margin:0;
   color:var(--muted);
-  max-width:100%;
 }
 
 /* ===============================
@@ -198,16 +194,16 @@ h1{
 }
 
 /* ===============================
-   Cards
+   Cards / Projects Grid
 ================================ */
 .grid{
   display:grid;
-  grid-template-columns:repeat(3, minmax(0, 1fr)); /* prevents overflow */
+  grid-template-columns:repeat(3, minmax(0, 1fr));
   gap:14px;
   padding:clamp(18px,2.5vw,28px);
 }
 
-/* IMPORTANT: this makes your Projects page (class="grid two") a 2-column grid */
+/* Projects page */
 .grid.two{
   grid-template-columns:repeat(2, minmax(0, 1fr));
 }
@@ -218,7 +214,6 @@ h1{
   border-radius:16px;
   padding:16px;
 
-  /* optional but recommended: consistent spacing/alignment inside cards */
   display:flex;
   flex-direction:column;
   gap:10px;
@@ -235,7 +230,6 @@ h1{
   color:var(--muted);
 }
 
-/* Optional: if you have .project-link in your HTML, this makes it sit at the bottom */
 .project-link{
   margin-top:auto;
 }
@@ -265,7 +259,6 @@ h1{
    Responsive
 ================================ */
 @media (max-width:900px){
-  /* better than collapsing straight to 1 column */
   .grid{
     grid-template-columns:repeat(2, minmax(0, 1fr));
   }
