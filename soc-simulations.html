@@ -3,58 +3,37 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="SOC Analyst simulations showcasing alert triage, escalation decisions, and documentation artifacts." />
+  <meta name="description" content="SOC Analyst simulations showcasing alert triage, escalation decisions, and incident documentation artifacts." />
   <title>SOC Analyst Simulations | Emilio Tarango</title>
 
   <style>
     :root{
-      --bg:#0b1220;
-      --border:rgba(255,255,255,0.10);
-      --text:rgba(255,255,255,0.92);
-      --muted:rgba(255,255,255,0.72);
-      --muted2:rgba(255,255,255,0.58);
-      --accent:#6ea8fe;
-      --shadow:0 18px 60px rgba(0,0,0,0.35);
-      --radius:18px;
-      --max:1100px;
+      --bg:#0b1220; --border:rgba(255,255,255,0.10);
+      --text:rgba(255,255,255,0.92); --muted:rgba(255,255,255,0.72); --muted2:rgba(255,255,255,0.58);
+      --accent:#6ea8fe; --shadow:0 18px 60px rgba(0,0,0,0.35);
+      --radius:18px; --max:1100px;
       --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
       --sans:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
     }
-
     *{box-sizing:border-box}
+
     html, body { height: 100%; }
 
     body{
-      margin:0;
-      min-height:100vh;
-      font-family:var(--sans);
-      color:var(--text);
-      line-height:1.55;
+      margin:0; font-family:var(--sans); color:var(--text); line-height:1.55;
       background:
-        radial-gradient(900px 520px at 15% 10%, rgba(110,168,254,0.18), transparent 55%),
-        radial-gradient(760px 520px at 85% 0%, rgba(126,231,135,0.14), transparent 55%),
-        radial-gradient(820px 560px at 80% 92%, rgba(255,204,102,0.10), transparent 58%),
-        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.18)),
+        radial-gradient(900px 500px at 15% 10%, rgba(110,168,254,0.18), transparent 55%),
+        radial-gradient(700px 450px at 85% 0%, rgba(126,231,135,0.14), transparent 55%),
+        radial-gradient(700px 500px at 80% 90%, rgba(255,204,102,0.10), transparent 55%),
         var(--bg);
-      background-attachment: fixed;
-    }
-
-    body::after{
-      content:"";
-      position:fixed;
-      inset:auto 0 0 0;
-      height:22vh;
-      pointer-events:none;
-      background:linear-gradient(180deg, transparent, rgba(0,0,0,0.28));
+      min-height:100vh;
     }
 
     a{color:inherit;text-decoration:none}
     a:hover{color:var(--accent)}
 
     .topbar{
-      position:sticky;
-      top:0;
-      z-index:10;
+      position:sticky; top:0; z-index:10;
       backdrop-filter:blur(14px);
       -webkit-backdrop-filter:blur(14px);
       background:rgba(11,18,32,0.62);
@@ -62,23 +41,13 @@
     }
 
     .topbar-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:14px 18px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
+      max-width:var(--max); margin:0 auto; padding:14px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
     }
 
-    .brand{
-      display:flex;
-      align-items:baseline;
-      font-weight:700;
-    }
+    .brand{display:flex; gap:10px; align-items:baseline; font-weight:700}
     .brand a{
       font-size:16px;
-      letter-spacing:0.1px;
       color:rgba(255,255,255,0.88);
       padding:8px 10px;
       border-radius:10px;
@@ -90,57 +59,25 @@
       background:rgba(255,255,255,0.03);
     }
 
-    .nav{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      align-items:center;
-    }
-
+    .nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
     .nav a{
-      font-size:14px;
-      color:var(--muted);
-      padding:8px 10px;
-      border-radius:10px;
-      border:1px solid transparent;
+      font-size:14px; color:var(--muted);
+      padding:8px 10px; border-radius:10px; border:1px solid transparent;
     }
-    .nav a:hover{
-      color:var(--text);
-      border-color:var(--border);
-      background:rgba(255,255,255,0.03);
-    }
+    .nav a:hover{color:var(--text); border-color:var(--border); background:rgba(255,255,255,0.03)}
+    .nav a.active{color:var(--text); border-color:rgba(110,168,254,0.35); background:rgba(110,168,254,0.10)}
 
-    .wrap{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:28px 18px 70px;
-    }
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 60px}
 
     .hero{
       border:1px solid var(--border);
       background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-      border-radius:var(--radius);
-      padding:26px;
-      box-shadow:var(--shadow);
+      border-radius:var(--radius); padding:26px; box-shadow:var(--shadow);
     }
-    .hero h1{
-      margin:0 0 10px;
-      font-size:clamp(26px,3.2vw,38px);
-      letter-spacing:-0.5px;
-    }
-    .hero p{
-      margin:0;
-      color:var(--muted);
-      max-width:92ch;
-    }
+    .hero h1{margin:0 0 10px; font-size:clamp(26px,3.2vw,38px); letter-spacing:-0.5px}
+    .hero p{margin:0; color:var(--muted); max-width:92ch}
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(12,1fr);
-      gap:14px;
-      margin-top:18px;
-    }
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:14px; margin-top:18px}
 
     .card{
       grid-column:span 6;
@@ -149,265 +86,47 @@
       border-radius:var(--radius);
       padding:18px;
       box-shadow:0 10px 40px rgba(0,0,0,0.22);
-      position:relative;
-      overflow:hidden;
-      transition:transform 140ms ease, border-color 140ms ease, background 140ms ease;
+      position:relative; overflow:hidden;
     }
-
     .card::before{
-      content:"";
-      position:absolute;
-      inset:0;
+      content:""; position:absolute; inset:0;
       background:radial-gradient(420px 160px at 20% 0%, rgba(110,168,254,0.12), transparent 50%);
       pointer-events:none;
     }
 
-    .card:hover{
-      transform:translateY(-2px);
-      border-color:rgba(255,255,255,0.16);
-      background:rgba(255,255,255,0.045);
-    }
-
+    /* Top row */
     .top{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      position:relative;
+      display:flex; justify-content:space-between; gap:12px; position:relative;
       align-items:flex-start;
     }
 
     .badge{
-      font-size:12px;
-      color:var(--muted);
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.03);
-      padding:6px 10px;
-      border-radius:999px;
-      white-space:nowrap;
-      display:inline-flex;
-      align-items:center;
-      align-self:flex-start;
+      font-size:12px; color:var(--muted);
+      border:1px solid var(--border); background:rgba(255,255,255,0.03);
+      padding:6px 10px; border-radius:999px; white-space:nowrap;
+      display:inline-flex; align-items:center; align-self:flex-start;
       line-height:1.2;
     }
 
     .title{margin:0; font-size:16px}
     .role{margin-top:6px; font-size:13px; color:var(--muted2)}
 
+    /* Blocks */
     .block{margin-top:14px; position:relative}
     .label{
-      font-size:12px;
-      letter-spacing:0.8px;
-      text-transform:uppercase;
-      color:rgba(255,255,255,0.62);
-      margin-bottom:6px;
+      font-size:12px; letter-spacing:0.8px; text-transform:uppercase;
+      color:rgba(255,255,255,0.62); margin-bottom:6px
     }
     .block p{margin:0; color:var(--muted)}
-
     ul{margin:8px 0 0 18px; padding:0; color:var(--muted)}
     li{margin:6px 0}
 
-    .artifacts{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:8px;
-    }
+    .artifacts{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
     .pill{
-      font-size:12px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.03);
-      padding:6px 10px;
-      border-radius:999px;
-      color:var(--muted);
-      display:inline-flex;
-      align-items:center;
+      font-size:12px; border:1px solid var(--border); background:rgba(255,255,255,0.03);
+      padding:6px 10px; border-radius:999px; color:var(--muted);
+      display:inline-flex; align-items:center;
     }
 
-    .ctaRow{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      margin-top:14px;
-      padding-top:14px;
-      border-top:1px solid rgba(255,255,255,0.08);
-      position:relative;
-    }
-
-    .cta{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      font-size:13px;
-      font-weight:600;
-      color:rgba(255,255,255,0.92);
-      border:1px solid rgba(110,168,254,0.35);
-      background:rgba(110,168,254,0.10);
-      padding:9px 12px;
-      border-radius:12px;
-      transition:transform 140ms ease, background 140ms ease, border-color 140ms ease;
-      white-space:nowrap;
-    }
-    .cta:hover{
-      transform:translateY(-1px);
-      border-color:rgba(110,168,254,0.55);
-      background:rgba(110,168,254,0.14);
-    }
-
-    .meta{
-      font-size:12px;
-      color:rgba(255,255,255,0.55);
-      font-family:var(--mono);
-      white-space:nowrap;
-    }
-
-    .footer{
-      margin-top:26px;
-      color:var(--muted2);
-      font-size:13px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      justify-content:space-between;
-      align-items:center;
-      padding-top:14px;
-      border-top:1px solid var(--border);
-    }
-
-    @media (max-width:900px){
-      .card{grid-column:span 12}
-      .wrap{padding:22px 14px 54px}
-      .hero{padding:18px}
-      .topbar-inner{padding:12px 14px}
-      .meta{white-space:normal}
-    }
-  </style>
-</head>
-
-<body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <a href="index.html" aria-label="Home">Emilio Tarango</a>
-      </div>
-
-      <nav class="nav" aria-label="Primary navigation">
-        <a href="projects.html">Projects</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <section class="hero">
-      <h1>SOC Analyst (I–II) Simulations</h1>
-      <p>Two role-based scenarios demonstrating alert triage, severity decisions, escalation rationale, and incident documentation artifacts.</p>
-    </section>
-
-    <div class="grid">
-
-      <!-- SIMULATION 1 -->
-      <article class="card">
-        <div class="top">
-          <div>
-            <h3 class="title">Suspicious PowerShell Activity Investigation</h3>
-            <div class="role">Role Simulation: SOC Analyst I</div>
-          </div>
-          <div class="badge">SOC / Triage</div>
-        </div>
-
-        <div class="block">
-          <div class="label">Scenario</div>
-          <p>Endpoint telemetry triggered on unusual PowerShell behavior. Goal: validate if activity was benign admin behavior or malicious execution.</p>
-        </div>
-
-        <div class="block">
-          <div class="label">What I Did</div>
-          <ul>
-            <li>Validated alert context (host, user, parent process, command line, and timing).</li>
-            <li>Checked for common abuse patterns (encoded commands, download cradles, LOLBins).</li>
-            <li>Correlated with adjacent signals (logon type, process tree, network connections).</li>
-            <li>Documented triage decision and next-step recommendations.</li>
-          </ul>
-        </div>
-
-        <div class="block">
-          <div class="label">Outcome</div>
-          <p>Triaged and classified with a clear rationale and evidence references, plus escalation criteria if additional indicators appeared.</p>
-        </div>
-
-        <div class="block">
-          <div class="label">Artifacts</div>
-          <div class="artifacts">
-            <span class="pill">Process Tree</span>
-            <span class="pill">Command-Line Review</span>
-            <span class="pill">IOC Notes</span>
-            <span class="pill">Triage Summary</span>
-          </div>
-        </div>
-
-        <div class="ctaRow">
-          <a class="cta" href="simulation1.html">View simulation →</a>
-          <span class="meta">Level: L1 • Focus: Triage</span>
-        </div>
-      </article>
-
-      <!-- SIMULATION 2 -->
-      <article class="card">
-        <div class="top">
-          <div>
-            <h3 class="title">Brute-Force Login Attempt with Lateral Movement Risk</h3>
-            <div class="role">Role Simulation: SOC Analyst II</div>
-          </div>
-          <div class="badge">SOC / Escalation</div>
-        </div>
-
-        <div class="block">
-          <div class="label">Scenario</div>
-          <p>Multiple failed authentication attempts across accounts and hosts suggested credential guessing and potential movement between systems.</p>
-        </div>
-
-        <div class="block">
-          <div class="label">What I Did</div>
-          <ul>
-            <li>Assessed severity using volume, spread, and success indicators.</li>
-            <li>Identified impacted identities, target systems, and attack pattern.</li>
-            <li>Recommended containment steps (account controls, IP blocks, segmentation checks).</li>
-            <li>Prepared escalation package with business impact + required actions.</li>
-          </ul>
-        </div>
-
-        <div class="block">
-          <div class="label">Outcome</div>
-          <p>Escalated with a structured summary, clear risk narrative, and actionable containment recommendations aligned to SOC workflows.</p>
-        </div>
-
-        <div class="block">
-          <div class="label">Artifacts</div>
-          <div class="artifacts">
-            <span class="pill">Auth Log Review</span>
-            <span class="pill">Severity Rationale</span>
-            <span class="pill">Escalation Notes</span>
-            <span class="pill">Containment Plan</span>
-          </div>
-        </div>
-
-        <div class="ctaRow">
-          <a class="cta" href="simulation2.html">View simulation →</a>
-          <span class="meta">Level: L2 • Focus: Escalation</span>
-        </div>
-      </article>
-
-    </div>
-
-    <footer class="footer">
-      <div>© <span id="year"></span> Emilio Tarango • Fort Worth, TX • Bilingual (English/Spanish)</div>
-      <div>Built for GitHub Pages • SOC simulations</div>
-    </footer>
-  </main>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+    .quote{
+      margin-top:12px; border-left:3px solid rgba(110,168,254,0.45);
