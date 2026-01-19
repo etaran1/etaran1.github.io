@@ -20,28 +20,28 @@
   --max:1100px;
 
   /* ===============================
-     Typography Scale (ADDED)
+     Typography Scale (FINAL)
   ================================ */
-  --fs-900: clamp(2rem, 3vw, 2.8rem);     /* h1 (matches your current vibe) */
-  --fs-800: clamp(1.35rem, 2vw, 1.8rem);  /* h2 */
-  --fs-700: 1.15rem;                      /* h3 */
-  --fs-600: 1.05rem;                      /* lead text */
-  --fs-500: 1rem;                         /* body */
-  --fs-400: 0.95rem;                      /* small */
-  --fs-300: 0.9rem;                       /* nav/footer */
+  --fs-900: clamp(3rem, 4.8vw, 4rem);       /* h1: 48–64px */
+  --fs-800: clamp(1.9rem, 2.7vw, 2.25rem);  /* h2: 30–36px */
+  --fs-700: 1.25rem;                        /* h3: 20px */
+  --fs-600: 1.125rem;                       /* lead: 18px */
+  --fs-500: 1rem;                           /* body: 16px */
+  --fs-400: 0.95rem;                        /* small */
+  --fs-300: 0.9rem;                         /* nav/footer */
 
   --lh-tight: 1.12;
-  --lh-body: 1.55;
+  --lh-body: 1.6;
 }
 
 /* ===============================
-   Base + Background Safety
+   Base + Background
 ================================ */
 *{ box-sizing:border-box; }
 
 html{
   height:100%;
-  background:var(--bg0); /* prevents Safari white flash */
+  background:var(--bg0);
   font-size:16px;
   -webkit-text-size-adjust:100%;
 }
@@ -62,7 +62,7 @@ body{
     );
   position:relative;
   overflow-x:hidden;
-  isolation:isolate; /* fixes pseudo-element stacking */
+  isolation:isolate;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
@@ -159,7 +159,7 @@ a{
 }
 
 /* ===============================
-   Headings + Type Rhythm (ADDED/UPDATED)
+   Headings & Typography
 ================================ */
 h1, h2, h3{
   margin:0 0 0.6rem;
@@ -169,7 +169,7 @@ h1, h2, h3{
 
 h1{
   font-size:var(--fs-900);
-  letter-spacing:-0.4px; /* keep your original feel */
+  letter-spacing:-0.04em;
 }
 
 h2{
@@ -180,71 +180,22 @@ h3{
   font-size:var(--fs-700);
 }
 
-/* Better default paragraph rhythm */
 p{
   margin:0 0 1rem;
 }
 
-/* Lead text utility (works with your .muted paragraphs too) */
 .lead{
   font-size:var(--fs-600);
-  line-height:1.7;
+  line-height:1.75;
   max-width:70ch;
 }
 
-/* Your existing class: keep it, but stop it from nuking margins everywhere */
 .muted{
   color:var(--muted);
 }
 
-/* Optional: a nicer “lede” that doesn’t fight muted */
-.lede{
-  margin:0 0 8px;
-  color:rgba(255,255,255,.86);
-  font-size:var(--fs-600);
-  line-height:1.7;
-  max-width:70ch;
-}
-
 /* ===============================
-   Hero / Page Headings
-================================ */
-.hero{
-  margin-top:18px;
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:calc(var(--radius) + 6px);
-  overflow:hidden;
-}
-
-.hero__top{
-  padding:clamp(22px,3vw,42px);
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
-
-/* ===============================
-   Metadata Row
-================================ */
-.meta{
-  margin-top:16px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  font-size:var(--fs-400);
-  color:var(--muted);
-}
-
-.meta strong{
-  color:var(--text);
-  font-weight:600;
-}
-
-.meta .dot{
-  opacity:.6;
-}
-
-/* ===============================
-   Cards / Projects Grid
+   Grid & Cards
 ================================ */
 .grid{
   display:grid;
@@ -253,7 +204,6 @@ p{
   padding:clamp(18px,2.5vw,28px);
 }
 
-/* Projects page */
 .grid.two{
   grid-template-columns:repeat(2, minmax(0, 1fr));
 }
@@ -263,7 +213,6 @@ p{
   border:1px solid rgba(255,255,255,.07);
   border-radius:16px;
   padding:16px;
-
   display:flex;
   flex-direction:column;
   gap:10px;
@@ -272,7 +221,6 @@ p{
 .card h3{
   margin:0 0 8px;
   font-size:var(--fs-700);
-  letter-spacing:-0.2px;
 }
 
 .card p{
@@ -280,29 +228,30 @@ p{
   color:var(--muted);
 }
 
-/* Lists inside cards (ADDED) */
+/* Lists inside cards */
 .card ul{
-  margin:0.25rem 0 0;
+  margin:0.35rem 0 0;
   padding-left:1.1rem;
   color:var(--muted);
+  font-size:0.97rem;
+  line-height:1.7;
 }
 
 .card li{
   margin:0.45rem 0;
 }
 
-/* Certifications list utility (ADDED for your skills page) */
+/* Certifications list */
 .cert-list{
   margin:0;
   padding-left:1.1rem;
   color:var(--muted);
-}
-.cert-list li{
-  margin:0.45rem 0;
+  font-size:0.97rem;
+  line-height:1.8;
 }
 
-.project-link{
-  margin-top:auto;
+.cert-list li{
+  margin:0.45rem 0;
 }
 
 /* ===============================
